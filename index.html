@@ -12,7 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-        
+
+        @font-face {
+            font-family: 'Military Poster';
+            src: url('resources/Military Poster.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
             --signal-red: #C81519;
             --absolute-black: #000000;
@@ -30,7 +38,7 @@
         }
         
         .heading-font {
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-family: 'Military Poster', 'Space Grotesk', 'Inter', sans-serif;
             font-weight: 600;
             letter-spacing: -0.02em;
         }
@@ -84,7 +92,6 @@
             will-change: transform;
         }
 
-        /* Tamaños progresivos claros */
         .hud-icon.layer-1 { opacity: 0.05; filter: blur(4px); }
         .hud-icon.layer-2 { opacity: 0.09; filter: blur(2.2px); }
         .hud-icon.layer-3 { opacity: 0.14; filter: blur(0.6px); }
@@ -343,7 +350,6 @@
             
             if (!hero) return;
 
-            // Zonas seguras para que no se encimen
             const safeZones = [
                 {x: [5,22], y: [10,32]},
                 {x: [26,44], y: [14,36]},
@@ -364,7 +370,6 @@
                 icon.style.top = `${top}%`;
             });
 
-            // Mouse Parallax + movimiento autónomo errático
             let isMouseActive = false;
 
             hero.addEventListener('mousemove', (e) => {
@@ -392,7 +397,6 @@
                 icons.forEach(icon => icon.style.transform = 'translate(0, 0)');
             });
 
-            // Movimiento errático más fuerte por capa
             icons.forEach((icon, index) => {
                 let t = index * 4.2;
                 const layer = parseInt(icon.dataset.layer) || 2;
@@ -401,7 +405,6 @@
                 function animate() {
                     t += 0.013;
 
-                    // Movimiento errático (múltiples frecuencias)
                     const x = Math.sin(t * 1.1) * (13 + baseAmp) + Math.cos(t * 1.9) * (6 + baseAmp * 0.6);
                     const y = Math.cos(t * 0.85) * (10 + baseAmp) + Math.sin(t * 1.6) * (5 + baseAmp * 0.7);
 
