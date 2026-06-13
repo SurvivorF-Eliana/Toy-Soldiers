@@ -53,7 +53,6 @@
             background: rgba(17, 20, 17, 0.6);
             border: 1px solid rgba(74, 82, 90, 0.4);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
         }
         .premium-card:hover {
             transform: translateY(-4px);
@@ -103,7 +102,6 @@
             color: #C81519;
         }
 
-        /* Rectangular horizontal crop */
         .logo-crop {
             height: 110px;
             overflow: hidden;
@@ -117,7 +115,6 @@
             object-position: center;
         }
 
-        /* Subtle noise texture */
         .noise {
             position: relative;
         }
@@ -126,11 +123,16 @@
             position: absolute;
             inset: 0;
             background-image: 
-                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-            background-size: 4px 4px;
+                linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+            background-size: 3px 3px;
             pointer-events: none;
             z-index: 1;
+        }
+
+        .parallax-logo {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
         }
     </style>
 </head>
@@ -158,11 +160,12 @@
         </div>
     </nav>
 
-    <!-- HERO -->
-    <header class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 noise">
+    <!-- HERO with Mouse Parallax -->
+    <header id="hero" class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 noise overflow-hidden">
         <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
             <div class="flex justify-center mb-8">
-                <img src="resources/png/TS_TagLogoAssetB_3K-px.png" alt="Toy Soldiers Primary Logo" class="h-28 md:h-36 w-auto logo-glow">
+                <img id="main-logo" src="resources/png/TS_TagLogoAssetB_3K-px.png" alt="Toy Soldiers Primary Logo" 
+                     class="h-40 md:h-52 w-auto logo-glow parallax-logo">
             </div>
 
             <h1 class="heading-font text-7xl md:text-[88px] leading-[0.92] font-semibold tracking-[-3.5px] mb-4 text-[#E5E5E0]">
@@ -194,7 +197,10 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Background elements for depth -->
         <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_0.8px,transparent_1px)] bg-[length:5px_5px] pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(200,21,25,0.03)_1px,transparent_1px)] bg-[length:100px_100px] pointer-events-none"></div>
     </header>
 
     <!-- EXPERIENCE -->
@@ -367,6 +373,29 @@
             });
         }
 
+        // Mouse Parallax on Main Logo
+        function initMouseParallax() {
+            const hero = document.getElementById('hero');
+            const logo = document.getElementById('main-logo');
+            
+            if (!hero || !logo) return;
+
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) - 0.5;
+                const y = ((e.clientY - rect.top) / rect.height) - 0.5;
+                
+                const moveX = x * 25;
+                const moveY = y * 18;
+                
+                logo.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+
+            hero.addEventListener('mouseleave', () => {
+                logo.style.transform = 'translate(0, 0)';
+            });
+        }
+
         function initParallax() {
             const hero = document.querySelector('header');
             if (!hero) return;
@@ -380,6 +409,7 @@
             initNavbar();
             initSmoothScroll();
             initParallax();
+            initMouseParallax();
         }
 
         window.onload = init;
