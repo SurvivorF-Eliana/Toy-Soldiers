@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToySoldiers | PvE • Deerisle</title>
+    <title>Toy Soldiers | PvE • Deerisle</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="resources/png/TS_Logo_1k.png">
@@ -40,7 +40,7 @@
         .heading-font {
             font-family: 'Military Poster', 'Space Grotesk', 'Inter', sans-serif;
             font-weight: 600;
-            letter-spacing: 0.5px; /* Ajustado para mejor kerning */
+            letter-spacing: 0.5px;
         }
 
         .tactical-bg {
@@ -83,6 +83,20 @@
             color: #C81519;
         }
 
+        /* Navbar logo con recorte rectangular */
+        .logo-crop {
+            height: 78px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .logo-crop img {
+            height: 175%;
+            width: auto;
+            object-fit: cover;
+            object-position: center;
+        }
+
         .hud-icon {
             position: absolute;
             pointer-events: none;
@@ -102,8 +116,9 @@
     <nav id="nav" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex items-center justify-between h-20">
-                <div class="flex items-center">
-                    <img src="resources/png/TS_H-Simple-DayZ-Logo-R_3K-px.png" alt="Toy Soldiers" class="h-[72px] w-auto">
+                <!-- Nuevo logo con recorte rectangular -->
+                <div class="logo-crop">
+                    <img src="https://raw.githubusercontent.com/SurvivorF-Eliana/Toy-Soldiers/main/resources/png/TS_H-SimpleLogo-R_3K-px.png" alt="Toy Soldiers">
                 </div>
 
                 <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
