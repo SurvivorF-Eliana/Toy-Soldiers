@@ -147,6 +147,29 @@
             border-radius: inherit;
             pointer-events: none;
         }
+
+        /* HUD / Futuristic screen feel */
+        .hud-screen {
+            position: relative;
+        }
+        .hud-screen::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(rgba(200,21,25,0.015) 50%, transparent 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 2;
+            mix-blend-mode: overlay;
+        }
+        .vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.45) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -173,13 +196,15 @@
         </div>
     </nav>
 
-    <!-- HERO - Main logo TS_Logo_1k.png grande -->
-    <header id="hero" class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 noise overflow-hidden">
+    <!-- HERO with HUD feel -->
+    <header id="hero" class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 noise hud-screen overflow-hidden">
+        <div class="vignette"></div>
+        
         <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
-            <!-- Logo principal grande (TS_Logo_1k.png) -->
+            <!-- Logo principal MUY grande -->
             <div class="flex justify-center mb-6">
                 <img id="main-logo" src="resources/png/TS_Logo_1k.png" alt="Toy Soldiers" 
-                     class="w-[160px] h-[160px] object-contain logo-glow parallax-logo">
+                     class="w-[200px] h-[200px] object-contain logo-glow parallax-logo">
             </div>
 
             <h1 class="heading-font text-7xl md:text-[88px] leading-[0.92] font-semibold tracking-[-3.5px] mb-4 text-[#E5E5E0]">
@@ -212,8 +237,8 @@
             </div>
         </div>
         
-        <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_0.8px,transparent_1px)] bg-[length:5px_5px] pointer-events-none z-0"></div>
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(200,21,25,0.025)_1px,transparent_1px)] bg-[length:80px_80px] pointer-events-none z-0"></div>
+        <!-- HUD lines -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(200,21,25,0.025)_1px,transparent_1px)] bg-[length:100px_100px] pointer-events-none z-0"></div>
     </header>
 
     <!-- EXPERIENCE -->
