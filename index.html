@@ -75,41 +75,18 @@
             color: #C81519;
         }
 
-        /* Futuristic clean HUD frame (estilo de la imagen) */
-        .futuristic-frame {
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 4px;
-        }
-
-        .hud-lines {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .hud-lines::before {
-            content: '';
-            position: absolute;
-            inset: 12px;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 2px;
-        }
-
-        /* DayZ HUD icons - parallax layers */
         .hud-icon {
             position: absolute;
-            opacity: 0.12;
-            filter: blur(1.8px);
             pointer-events: none;
             z-index: 1;
             transition: transform 0.1s ease-out;
+            user-select: none;
         }
 
-        .hud-icon.layer-1 { opacity: 0.07; filter: blur(2.8px); }
-        .hud-icon.layer-2 { opacity: 0.11; filter: blur(1.6px); }
-        .hud-icon.layer-3 { opacity: 0.16; filter: blur(0.9px); }
+        /* Diferentes profundidades y tamaños */
+        .hud-icon.layer-1 { opacity: 0.06; filter: blur(3.5px); }
+        .hud-icon.layer-2 { opacity: 0.10; filter: blur(2px); }
+        .hud-icon.layer-3 { opacity: 0.15; filter: blur(0.8px); }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -136,29 +113,32 @@
         </div>
     </nav>
 
-    <!-- HERO with clean futuristic HUD frame + parallax icons -->
+    <!-- HERO with many DayZ HUD icons at different layers -->
     <header id="hero" class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 overflow-hidden">
         
-        <!-- DayZ HUD icons como capas de profundidad (parallax) -->
-        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/8/80/GUI_icon_stomach_stuffed_transparent.png/revision/latest?cb=20231210103236" 
-             class="hud-icon layer-1 w-12 top-[18%] left-[12%]" alt="">
-        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/f/fb/Gui_IconBacteria.png/revision/latest?cb=20240120120943" 
-             class="hud-icon layer-2 w-9 top-[28%] right-[15%]" alt="">
-        <img src="https://cdn3.emoji.gg/emojis/1687-dayz-health.png" 
-             class="hud-icon layer-3 w-10 top-[42%] left-[8%]" alt="">
-        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/1/11/IconBlood0.png/revision/latest/thumbnail/width/360/height/360?cb=20240115003233" 
-             class="hud-icon layer-1 w-8 top-[55%] right-[10%]" alt="">
-        <img src="https://cdn3.emoji.gg/emojis/7021-dayz-hunger.png" 
-             class="hud-icon layer-2 w-11 top-[65%] left-[18%]" alt="">
-        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/2/27/Gui_iconTemperature2.png/revision/latest?cb=20240206192102" 
-             class="hud-icon layer-3 w-9 top-[72%] right-[19%]" alt="">
+        <!-- Capa 1 (más lejos - más blur y chico) -->
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/8/80/GUI_icon_stomach_stuffed_transparent.png/revision/latest?cb=20231210103236" class="hud-icon layer-1 w-8 top-[12%] left-[8%]" alt="">
+        <img src="https://cdn3.emoji.gg/emojis/7021-dayz-hunger.png" class="hud-icon layer-1 w-7 top-[22%] right-[22%]" alt="">
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/2/27/Gui_iconTemperature2.png/revision/latest?cb=20240206192102" class="hud-icon layer-1 w-6 top-[68%] left-[15%]" alt="">
+
+        <!-- Capa 2 (medio) -->
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/f/fb/Gui_IconBacteria.png/revision/latest?cb=20240120120943" class="hud-icon layer-2 w-11 top-[18%] right-[12%]" alt="">
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/1/11/IconBlood0.png/revision/latest/thumbnail/width/360/height/360?cb=20240115003233" class="hud-icon layer-2 w-9 top-[35%] left-[6%]" alt="">
+        <img src="https://cdn3.emoji.gg/emojis/1687-dayz-health.png" class="hud-icon layer-2 w-10 top-[58%] right-[8%]" alt="">
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/8/80/GUI_icon_stomach_stuffed_transparent.png/revision/latest?cb=20231210103236" class="hud-icon layer-2 w-8 top-[75%] right-[18%]" alt="">
+
+        <!-- Capa 3 (más cerca - más nítido y grande) -->
+        <img src="https://cdn3.emoji.gg/emojis/1687-dayz-health.png" class="hud-icon layer-3 w-14 top-[25%] left-[14%]" alt="">
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/f/fb/Gui_IconBacteria.png/revision/latest?cb=20240120120943" class="hud-icon layer-3 w-12 top-[48%] right-[14%]" alt="">
+        <img src="https://cdn3.emoji.gg/emojis/7021-dayz-hunger.png" class="hud-icon layer-3 w-13 top-[62%] left-[10%]" alt="">
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/2/27/Gui_iconTemperature2.png/revision/latest?cb=20240206192102" class="hud-icon layer-3 w-11 top-[38%] left-[22%]" alt="">
+        <img src="https://static.wikia.nocookie.net/dayz_gamepedia/images/1/11/IconBlood0.png/revision/latest/thumbnail/width/360/height/360?cb=20240115003233" class="hud-icon layer-3 w-10 top-[72%] right-[12%]" alt="">
 
         <div class="max-w-5xl mx-auto px-6 text-center relative z-20">
             
-            <!-- Logo principal grande -->
             <div class="flex justify-center mb-8">
                 <img id="main-logo" src="resources/png/TS_Logo_1k.png" alt="Toy Soldiers" 
-                     class="w-[210px] h-[210px] object-contain logo-glow parallax-logo">
+                     class="w-[230px] h-[230px] object-contain logo-glow parallax-logo">
             </div>
 
             <h1 class="heading-font text-7xl md:text-[92px] leading-[0.9] font-semibold tracking-[-4px] mb-4 text-[#E5E5E0]">
@@ -191,8 +171,7 @@
             </div>
         </div>
 
-        <!-- Fondo sutil con lineas HUD futurista (estilo de la imagen) -->
-        <div class="absolute inset-0 bg-[radial-gradient(#ffffff06_0.6px,transparent_1px)] bg-[length:5px_5px] pointer-events-none z-10"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff05_0.6px,transparent_1px)] bg-[length:5px_5px] pointer-events-none z-10"></div>
     </header>
 
     <!-- EXPERIENCE -->
@@ -354,7 +333,7 @@
             });
         }
 
-        // Mouse Parallax on logo + HUD icons (different depths)
+        // Mouse Parallax - diferentes velocidades por capa
         function initMouseParallax() {
             const hero = document.getElementById('hero');
             const logo = document.getElementById('main-logo');
@@ -367,15 +346,17 @@
                 const x = ((e.clientX - rect.left) / rect.width) - 0.5;
                 const y = ((e.clientY - rect.top) / rect.height) - 0.5;
                 
-                // Logo principal
                 if (logo) {
-                    logo.style.transform = `translate(${x * 28}px, ${y * 20}px)`;
+                    logo.style.transform = `translate(${x * 30}px, ${y * 22}px)`;
                 }
 
-                // Iconos en diferentes profundidades
                 icons.forEach((icon, index) => {
-                    const speed = 14 + (index * 7);
-                    icon.style.transform = `translate(${x * speed}px, ${y * (speed * 0.75)}px)`;
+                    let speed = 10;
+                    if (icon.classList.contains('layer-1')) speed = 8;
+                    if (icon.classList.contains('layer-2')) speed = 14;
+                    if (icon.classList.contains('layer-3')) speed = 22;
+
+                    icon.style.transform = `translate(${x * speed}px, ${y * (speed * 0.8)}px)`;
                 });
             });
 
