@@ -148,25 +148,54 @@
             pointer-events: none;
         }
 
-        /* HUD / Futuristic screen feel */
-        .hud-screen {
+        /* HUD Monitor Curvo + Scanlines fuertes */
+        .hud-monitor {
             position: relative;
+            box-shadow: 
+                0 0 0 12px #111411,
+                0 0 0 18px #0a0c0b,
+                0 25px 70px -15px rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
         }
-        .hud-screen::after {
-            content: '';
+
+        .scanlines {
             position: absolute;
             inset: 0;
-            background: 
-                linear-gradient(rgba(200,21,25,0.015) 50%, transparent 50%);
-            background-size: 100% 4px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 3px,
+                rgba(0, 0, 0, 0.35) 3px,
+                rgba(0, 0, 0, 0.35) 4px
+            );
             pointer-events: none;
-            z-index: 2;
-            mix-blend-mode: overlay;
+            z-index: 3;
+            mix-blend-mode: multiply;
         }
+
         .vignette {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.45) 100%);
+            background: radial-gradient(
+                circle at center,
+                transparent 35%,
+                rgba(0,0,0,0.55) 75%,
+                rgba(0,0,0,0.75) 100%
+            );
+            pointer-events: none;
+            z-index: 2;
+            border-radius: 12px;
+        }
+
+        .curved-screen {
+            position: relative;
+        }
+        .curved-screen::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), transparent 40%);
+            border-radius: 14px;
             pointer-events: none;
             z-index: 1;
         }
@@ -196,49 +225,53 @@
         </div>
     </nav>
 
-    <!-- HERO with HUD feel -->
-    <header id="hero" class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 noise hud-screen overflow-hidden">
-        <div class="vignette"></div>
-        
-        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
-            <!-- Logo principal MUY grande -->
-            <div class="flex justify-center mb-6">
-                <img id="main-logo" src="resources/png/TS_Logo_1k.png" alt="Toy Soldiers" 
-                     class="w-[200px] h-[200px] object-contain logo-glow parallax-logo">
-            </div>
-
-            <h1 class="heading-font text-7xl md:text-[88px] leading-[0.92] font-semibold tracking-[-3.5px] mb-4 text-[#E5E5E0]">
-                TOY SOLDIERS<br>
-                <span class="text-[#C81519]">TACTICAL PVE</span>
-            </h1>
-            
-            <p class="max-w-md mx-auto text-xl md:text-2xl text-white/70 mb-10 tracking-tight">
-                High-end survival on Deerisle.<br>
-                No shortcuts. Elite only.
-            </p>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#join" class="tactical-btn group inline-flex items-center justify-center gap-x-3 bg-[#C81519] text-white px-9 py-4 rounded-2xl font-semibold text-base hover:bg-[#a60f12] transition-all active:scale-[0.985]">
-                    <span>JOIN THE SERVER</span>
-                    <i class="fa-solid fa-arrow-right group-active:translate-x-0.5 transition"></i>
-                </a>
+    <!-- HERO - HUD Monitor Curvo -->
+    <header id="hero" class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 noise overflow-hidden">
+        <div class="max-w-[1100px] mx-auto px-6 relative z-10">
+            <!-- Marco de monitor curvo -->
+            <div class="hud-monitor curved-screen mx-auto max-w-[980px] rounded-[14px] overflow-hidden border border-white/10">
                 
-                <a href="https://github.com/SurvivorF-Eliana/deerisle.ToySoldiers/blob/main/BRANDING.md" target="_blank"
-                   class="inline-flex items-center justify-center gap-x-3 border border-white/30 hover:bg-white/5 px-8 py-4 rounded-2xl font-medium text-base transition-colors">
-                    <span>VIEW BRAND BOOK</span>
-                </a>
-            </div>
+                <!-- Contenido dentro de la "pantalla" -->
+                <div class="relative px-10 py-16 text-center">
+                    <div class="vignette"></div>
+                    <div class="scanlines"></div>
 
-            <div class="mt-16 flex justify-center">
-                <div class="flex flex-col items-center text-white/40 text-xs tracking-[2px]">
-                    <span>SCROLL TO BEGIN</span>
-                    <i class="fa-solid fa-chevron-down mt-1.5 animate-bounce"></i>
+                    <div class="flex justify-center mb-6 relative z-10">
+                        <img id="main-logo" src="resources/png/TS_Logo_1k.png" alt="Toy Soldiers" 
+                             class="w-[220px] h-[220px] object-contain logo-glow parallax-logo">
+                    </div>
+
+                    <h1 class="heading-font text-7xl md:text-[92px] leading-[0.9] font-semibold tracking-[-4px] mb-5 text-[#E5E5E0] relative z-10">
+                        TOY SOLDIERS<br>
+                        <span class="text-[#C81519]">TACTICAL PVE</span>
+                    </h1>
+                    
+                    <p class="max-w-md mx-auto text-2xl text-white/75 mb-10 tracking-tight relative z-10">
+                        High-end survival on Deerisle.<br>
+                        No shortcuts. Elite only.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+                        <a href="#join" class="tactical-btn group inline-flex items-center justify-center gap-x-3 bg-[#C81519] text-white px-10 py-4 rounded-2xl font-semibold text-lg hover:bg-[#a60f12] transition-all active:scale-[0.985]">
+                            <span>JOIN THE SERVER</span>
+                            <i class="fa-solid fa-arrow-right group-active:translate-x-0.5 transition"></i>
+                        </a>
+                        
+                        <a href="https://github.com/SurvivorF-Eliana/deerisle.ToySoldiers/blob/main/BRANDING.md" target="_blank"
+                           class="inline-flex items-center justify-center gap-x-3 border border-white/30 hover:bg-white/5 px-9 py-4 rounded-2xl font-medium text-lg transition-colors">
+                            <span>VIEW BRAND BOOK</span>
+                        </a>
+                    </div>
+
+                    <div class="mt-14 flex justify-center relative z-10">
+                        <div class="flex flex-col items-center text-white/40 text-xs tracking-[3px]">
+                            <span>SCROLL TO BEGIN</span>
+                            <i class="fa-solid fa-chevron-down mt-2 animate-bounce"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- HUD lines -->
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(200,21,25,0.025)_1px,transparent_1px)] bg-[length:100px_100px] pointer-events-none z-0"></div>
     </header>
 
     <!-- EXPERIENCE -->
@@ -423,8 +456,8 @@
                 const x = ((e.clientX - rect.left) / rect.width) - 0.5;
                 const y = ((e.clientY - rect.top) / rect.height) - 0.5;
                 
-                const moveX = x * 22;
-                const moveY = y * 16;
+                const moveX = x * 24;
+                const moveY = y * 18;
                 
                 logo.style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
