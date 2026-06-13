@@ -50,14 +50,15 @@
 
         .premium-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(17, 20, 17, 0.6);
-            border: 1px solid rgba(74, 82, 90, 0.4);
-            backdrop-filter: blur(12px);
+            background: rgba(17, 20, 17, 0.55);
+            border: 1px solid rgba(74, 82, 90, 0.35);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         .premium-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2);
-            border-color: rgba(200, 21, 25, 0.3);
+            transform: translateY(-6px);
+            border-color: rgba(200, 21, 25, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
         }
 
         .tactical-btn {
@@ -72,7 +73,7 @@
             left: -100%;
             width: 50%;
             height: 200%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             transition: 0.5s;
         }
         .tactical-btn:hover::after {
@@ -80,7 +81,7 @@
         }
 
         .logo-glow {
-            filter: drop-shadow(0 0 25px rgba(200, 21, 25, 0.2));
+            filter: drop-shadow(0 0 30px rgba(200, 21, 25, 0.25));
         }
 
         .feature-icon {
@@ -102,14 +103,15 @@
             color: #C81519;
         }
 
+        /* Navbar logo - achicado 20% */
         .logo-crop {
-            height: 110px;
+            height: 88px;
             overflow: hidden;
             display: flex;
             align-items: center;
         }
         .logo-crop img {
-            height: 180%;
+            height: 170%;
             width: auto;
             object-fit: cover;
             object-position: center;
@@ -123,16 +125,29 @@
             position: absolute;
             inset: 0;
             background-image: 
-                linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+                linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
             background-size: 3px 3px;
             pointer-events: none;
             z-index: 1;
         }
 
         .parallax-logo {
-            transition: transform 0.1s ease-out;
+            transition: transform 0.08s ease-out;
             will-change: transform;
+        }
+
+        /* Layered UI depth */
+        .layered {
+            position: relative;
+        }
+        .layered::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.06), transparent);
+            border-radius: inherit;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -160,12 +175,13 @@
         </div>
     </nav>
 
-    <!-- HERO with Mouse Parallax -->
+    <!-- HERO -->
     <header id="hero" class="min-h-[100dvh] flex items-center justify-center relative tactical-bg pt-20 noise overflow-hidden">
         <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
-            <div class="flex justify-center mb-8">
-                <img id="main-logo" src="resources/png/TS_TagLogoAssetB_3K-px.png" alt="Toy Soldiers Primary Logo" 
-                     class="h-40 md:h-52 w-auto logo-glow parallax-logo">
+            <!-- Logo principal square 100x100 -->
+            <div class="flex justify-center mb-6">
+                <img id="main-logo" src="resources/png/TS_TagLogoAssetB_3K-px.png" alt="Toy Soldiers" 
+                     class="w-[100px] h-[100px] object-contain logo-glow parallax-logo">
             </div>
 
             <h1 class="heading-font text-7xl md:text-[88px] leading-[0.92] font-semibold tracking-[-3.5px] mb-4 text-[#E5E5E0]">
@@ -198,9 +214,8 @@
             </div>
         </div>
         
-        <!-- Background elements for depth -->
-        <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_0.8px,transparent_1px)] bg-[length:5px_5px] pointer-events-none"></div>
-        <div class="absolute inset-0 bg-[linear-gradient(rgba(200,21,25,0.03)_1px,transparent_1px)] bg-[length:100px_100px] pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_0.8px,transparent_1px)] bg-[length:5px_5px] pointer-events-none z-0"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(200,21,25,0.025)_1px,transparent_1px)] bg-[length:80px_80px] pointer-events-none z-0"></div>
     </header>
 
     <!-- EXPERIENCE -->
@@ -218,7 +233,7 @@
             </div>
             
             <div class="md:col-span-5 mt-10 md:mt-0">
-                <div class="bg-[#1A1A1A] border border-[#4A525A] rounded-3xl p-8 backdrop-blur-xl">
+                <div class="bg-[#1A1A1A] border border-[#4A525A] rounded-3xl p-8 backdrop-blur-xl layered">
                     <div class="grid grid-cols-2 gap-6 text-center">
                         <div>
                             <div class="text-4xl font-semibold text-[#C81519] stat-number">2x</div>
@@ -242,7 +257,7 @@
         </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- FEATURES with layered UI -->
     <section id="features" class="section-dark py-20">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14">
@@ -251,7 +266,7 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="premium-card border rounded-3xl p-8 group">
+                <div class="premium-card border rounded-3xl p-8 group layered">
                     <div class="feature-icon w-12 h-12 flex items-center justify-center bg-white/5 rounded-2xl mb-6">
                         <i class="fa-solid fa-shield-halved text-3xl"></i>
                     </div>
@@ -259,7 +274,7 @@
                     <p class="text-white/70">Virtual storage systems and strict database-driven mechanics. No cars flying, no item deletion, stable 60+ tick.</p>
                 </div>
 
-                <div class="premium-card border rounded-3xl p-8 group">
+                <div class="premium-card border rounded-3xl p-8 group layered">
                     <div class="feature-icon w-12 h-12 flex items-center justify-center bg-white/5 rounded-2xl mb-6">
                         <i class="fa-solid fa-user-secret text-3xl"></i>
                     </div>
@@ -267,7 +282,7 @@
                     <p class="text-white/70">2x high-tier bosses that require coordinated 4-player teams with custom Tier weapons. Real challenge.</p>
                 </div>
 
-                <div class="premium-card border rounded-3xl p-8 group">
+                <div class="premium-card border rounded-3xl p-8 group layered">
                     <div class="feature-icon w-12 h-12 flex items-center justify-center bg-white/5 rounded-2xl mb-6">
                         <i class="fa-solid fa-chess-rook text-3xl"></i>
                     </div>
@@ -275,7 +290,7 @@
                     <p class="text-white/70">Unique plastic military NPC retextures with custom shaders. Immersive high-threat AI.</p>
                 </div>
 
-                <div class="premium-card border rounded-3xl p-8 group">
+                <div class="premium-card border rounded-3xl p-8 group layered">
                     <div class="feature-icon w-12 h-12 flex items-center justify-center bg-white/5 rounded-2xl mb-6">
                         <i class="fa-solid fa-chart-line text-3xl"></i>
                     </div>
@@ -283,7 +298,7 @@
                     <p class="text-white/70">High-value trader progression, DNA Keycard systems, industrial crafting and real economy.</p>
                 </div>
 
-                <div class="premium-card border rounded-3xl p-8 group">
+                <div class="premium-card border rounded-3xl p-8 group layered">
                     <div class="feature-icon w-12 h-12 flex items-center justify-center bg-white/5 rounded-2xl mb-6">
                         <i class="fa-solid fa-truck text-3xl"></i>
                     </div>
@@ -291,7 +306,7 @@
                     <p class="text-white/70">No supercars. Rugged off-road trucks with proper suspension and traction physics.</p>
                 </div>
 
-                <div class="premium-card border rounded-3xl p-8 group">
+                <div class="premium-card border rounded-3xl p-8 group layered">
                     <div class="feature-icon w-12 h-12 flex items-center justify-center bg-white/5 rounded-2xl mb-6">
                         <i class="fa-solid fa-lock text-3xl"></i>
                     </div>
@@ -373,7 +388,7 @@
             });
         }
 
-        // Mouse Parallax on Main Logo
+        // Mouse Parallax
         function initMouseParallax() {
             const hero = document.getElementById('hero');
             const logo = document.getElementById('main-logo');
@@ -385,8 +400,8 @@
                 const x = ((e.clientX - rect.left) / rect.width) - 0.5;
                 const y = ((e.clientY - rect.top) / rect.height) - 0.5;
                 
-                const moveX = x * 25;
-                const moveY = y * 18;
+                const moveX = x * 22;
+                const moveY = y * 16;
                 
                 logo.style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
